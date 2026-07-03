@@ -1,0 +1,79 @@
+<section class="mx-3">
+  <h1 class="text-2xl">Pipes personalizados</h1>
+</section>
+
+<div class="stats shadow">
+  <div class="stat">
+    <div class="stat-title">Toggle Case Pipe</div>
+    <div class="stat-value">{{ name() | toggleCase: upperCase() }}</div>
+    <div class="stat-desc">{{ name() }}</div>
+
+    <button class="btn btn-primary" (click)="upperCase.set(!upperCase())">
+      Toggle Case
+    </button>
+  </div>
+</div>
+
+<div class="divider mt-2"></div>
+
+<section class="my-3">
+  <h2 class="text-xl">Filtrando por {{ searchQuery() }} ordenado por {{ sortBy() }}</h2>
+
+  <div class="flex gap-2 justify-end w-full mt-2">
+<input
+      type="text"
+      placeholder="Filtrar por nombre"
+      class="input input-bordered w-full max-w-xs"
+      #txtSearch
+      (input)="searchQuery.set(txtSearch.value)"
+    />
+    <div class="flex flex-1"></div>
+    <button  class="btn btn-primary" (click)="sortBy.set('name')">Por nombre</button>
+    <button class="btn btn-accent" (click)="sortBy.set('canFly')">Por volar</button>
+    <button class="btn btn-secondary" (click)="sortBy.set('color')">Por color</button>
+    <button class="btn btn-info" (click)="sortBy.set('creator')">Por creador</button>
+  </div>
+</section>
+<div class="overflow-x-auto w-full">
+  <table class="table table-xs w-full">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Puede volar</th>
+        <th>Color</th>
+        <th>Creador</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of heroes() | HeroFilter:searchQuery() | HeroSortBy:sortBy() ; track $index) {
+      <tr>
+        <th>{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>
+          <span
+            class="text-xs w-44"
+            [class.text-success]="item.canFly"
+            [class.text-accent]="!item.canFly"
+          >
+            {{ item.canFly | canFly }}
+          </span>
+        </td>
+        <td>
+          <span class="text-xs w-44" [style.color]="item.color | HeroTextColor">
+            {{ item.color | heroColor | titlecase}}
+          </span>
+        </td>
+        <td>
+          <span
+            [class.text-accent]="item.creator === 0"
+            [class.text-primary]="item.creator === 1"
+          >
+            {{ item.creator | HeroCreatorPipe }}</span
+          >
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

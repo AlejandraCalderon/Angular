@@ -1,0 +1,64 @@
+<section class="mt-5">
+    <table class="table table-md mt-2 w-full">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Icono</th>
+                <th>Bandera</th>
+                <th>Nombre</th>
+                <th>Capital</th>
+                <th>Población</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (country of countries(); track country.cca2; let index = $index) {
+            <tr>
+                <td>{{ index + 1 }}</td>
+                <td>{{ country.flag }}</td>
+                <td>
+                    <img [src]="country.flagSvg" [alt]="'Flag of ' + country.name" class="w-10">
+                </td>
+                <td>{{ country.name }}</td>
+                <td>{{ country.capital }}</td>
+                <td><span class="badge badge-info" >{{ country.population | number }}</span> </td>
+                <td>
+                    <a class="link-primary cursor-pointer" [routerLink]="['/country/by', country.cca2]" >More info</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+
+        @if (errorMesage()) {
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="alert alert-error mt-4 alert-dash">
+                        <span>{{ errorMesage() }}</span>
+                    </div>
+                </td>
+            </tr>
+        }
+
+        @if (countries().length === 0 && !isLoading()) {
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="alert alert-soft alert-outline mt-4">
+                        <span>No countries found.</span>
+                    </div>
+                </td>
+            </tr>
+        }
+        @if (isLoading()) {
+        <tfoot>
+            <tr>
+                <td colspan="7">
+                    <div class="flex justify-center mt-4">
+                        <span class="loading loading-spinner loading-lg"></span>
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</section>

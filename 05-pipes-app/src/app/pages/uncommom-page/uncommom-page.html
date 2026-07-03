@@ -1,0 +1,71 @@
+<section class="mx-5 mb-5">
+  <h1 class="text-2xl">Pipes no tan comunes</h1>
+</section>
+
+<div class="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4">
+  <app-card title="i18nSelectPipe">
+    <p>
+      Saludos {{client().name}}, es un gusto {{client().gender | i18nSelect:
+      invitationMap}} a nuestro evento
+    </p>
+    <button class="btn btn-primary" (click)="changeClient()">
+      Cambiar cliente
+    </button>
+  </app-card>
+
+  <app-card title="i18nPluralPipe">
+    <p>Actualmente {{clients().length |i18nPlural:clientsMap()}}</p>
+    <button
+      [disabled]=" clients().length === 0 "
+      class="btn btn-primary"
+      (click)="deleteClient()"
+    >
+      Borrar cliente
+    </button>
+  </app-card>
+
+  <app-card title="SlicePipe">
+    <b>Original</b>
+    <p class="text-primary">{{ clients().join(', ') }}</p>
+    <b class="mt-2">Slice:0:2 </b>
+    <p class="text-primary">{{clients() | slice:0:2}}</p>
+  </app-card>
+
+  <app-card title="JsonPipe">
+    <pre class="text-primary">{{ clients() | json }}</pre>
+
+    <pre class="text-primary">{{ client() |json}}</pre>
+
+    <p class="text-primary">{{ clients().join(', ') |json}}</p>
+  </app-card>
+
+  <app-card title="KeyValuePipe">
+    <!-- <pre class="text-primary">{{ profile | keyvalue |json}}</pre> -->
+    <ul>
+      @for (items of profile |keyvalue; track $index) {
+      <li>
+        <span class="text-primary"
+          ><strong>{{items.key | titlecase}}</strong>
+        </span>
+        {{items.value}}
+      </li>
+      }
+    </ul>
+  </app-card>
+
+  <app-card title="AsyncPipe">
+    @if (promiseValue |async; as value) {
+    <p class="text-primary">{{ value }}</p>
+    }@else {
+    <p class="text-accent">Esperando promesa...</p>
+    }
+
+    <h3>Observable</h3>
+
+    @if (myObservableInternal | async; as value) {
+      <p class="text-primary">Valor : {{ value }}</p>
+    }@else {
+      <p class="text-accent">Esperando observable...</p>
+    }
+  </app-card>
+</div>

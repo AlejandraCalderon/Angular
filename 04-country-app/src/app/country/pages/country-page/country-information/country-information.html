@@ -1,0 +1,27 @@
+<section>
+    <div class="card card-side bg-base-100 shadow-sm">
+        <figure>
+            <img [src]="country().flagSvg" [alt]="'Bandera de ' + country().name" [title]="country().name">
+        </figure>
+        <div class="card-body">
+            <h2 class="card-title text-3xl">{{ country().name }}</h2>
+            <div class="stats shadow">
+                <div class="stat place-items-center">
+                    <div class="stat-title">Población</div>
+                    <div class="stat-value">{{ country().population | number }}</div>
+                </div>
+                <div class="stat place-items-center">
+                    <div class="stat-title">Capital</div>
+                    <div class="stat-value text-info">{{ country().capital }}</div>
+                </div>
+                <div class="stat place-items-center">
+                    <div class="stat-title">Region</div>
+                    <div class="stat-value">{{ country().subRegion }}</div>
+                    <div class="stat-desc">{{ country().region }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-link mt-4" (click)="goBack()">Regresar</a>
+</section>
