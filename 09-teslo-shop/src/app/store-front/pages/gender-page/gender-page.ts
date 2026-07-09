@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '@products/services/products.service';
 import { map } from 'rxjs';
 import { ProductCard } from "@products/components/product-card/product-card";
-import { Gender } from '../../../products/interfaces/product.interface';
+
 
 @Component({
   selector: 'app-gender-page',
