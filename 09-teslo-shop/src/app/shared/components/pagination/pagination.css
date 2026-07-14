@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+:host .btn {
+  background-color: #0f172a !important; /* slate-800 */
+  color: #ffffff !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+:host .btn:hover {
+  background-color: #1f2937 !important; /* slate-700 */
+}
+
+:host .bg-pink-500 {
+  background-color: #ec4899 !important;
+  color: #ffffff !important;
+}

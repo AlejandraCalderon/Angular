@@ -1,0 +1,11 @@
+<div class="flex justify-center items-center mt-4 gap-1">
+    @for (page of getPagesArray(); track $index) {
+    <button
+        class="btn btn-sm bg-slate-800 text-white hover:bg-slate-700 transition-colors"
+        [routerLink]="[]"
+        [queryParams]="{page: page}"
+        [class.bg-pink-500]="page == activePage()"
+        (click)="activePage.set(page)"
+    >{{ page }}</button>
+    }
+</div>

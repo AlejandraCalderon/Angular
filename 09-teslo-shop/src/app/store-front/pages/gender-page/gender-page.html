@@ -1,7 +1,9 @@
 <h1 class="text-3xl font-bold font-montserrat">Todos los productos</h1>
-<h2>Para todos los gustos {{gender()}} </h2>
+<h2>Para todos los gustos {{gender()}}</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
     @for (product of productsResource.value()?.products; track $index) {
     <product-card [product]="product"></product-card>
     }
 </div>
+<shared-pagination [pages]="productsResource.value()?.pages ?? 0" [currentPage]="paginationService.currentPage()"/>
+<div class="divider"></div>

@@ -79,7 +79,16 @@
       </li>
     </ul>
   </div>
-  <div class="navbar-end">
-    <a class="btn">Button</a>
+  <div class="navbar-end gap-2">
+    @if (authService.authStatus() === 'authenticated' ) {
+    <button class=" bg-slate-600 text-white py-2 hover:bg-zinc-600">{{authService.user()?.fullName}}</button>
+    <button class="btn  bg-pink-500 text-white py-2 hover:bg-pink-600" (click)="authService.logout()" >Salir</button>
+    }
+    @else if(authService.authStatus() === 'not-authenticated') {
+      <a routerLink="/auth/login" class="btn bg-blue-600" >Login</a>
+    }
+    @else {
+      <a class="btn btn-ghost" >...</a>
+    }
   </div>
 </div>
